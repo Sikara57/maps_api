@@ -1,0 +1,21 @@
+#map
+{
+    height:300px;
+    min-width:450px;
+    width:100%;
+}
+
+.hide
+{
+    display: none;
+}
+
+.show
+{
+    display: block;
+}
+
+.btn
+{
+    margin-bottom: 20px;
+}

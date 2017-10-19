@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Maps</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+    <link rel="stylesheet" href="script/index.css">
+    
+    <!-- Compiled and minified JavaScript -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+</head>
+<body> 
+    <form name="recherche" id="fRecherche" method="post">
+        <div class="row">
+            <fieldset class="col s4 offset-s1">
+                <legend>Départ</legend>
+                <input type="text" name="origin" id="origin"><label for="origin">Départ</label>
+                <div id="complete_adress_dep" class="hide">
+                    <div class="row">
+                        <div class="col s3">
+                            <input type="text" name="numDepart" id="street_number_dep"><label for="numDepart">n°</label>
+                        </div>
+                        <div class="col s9">
+                            <input type="text" name="rueDepart" id="route_dep"><label for="rueDepart">rue</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s3">
+                            <input type="text" name="cpDepart" id="postal_code_dep"><label for="cpDepart">code postal</label>
+                        </div>
+                        <div class="col s9">
+                            <input type="text" name="villeDepart" id="locality_dep"><label for="villeDepart">ville</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <input type="text" name="area_dep" id="administrative_area_level_1_dep"><label for="area_dep">Région</label>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" name="country_dep" id="country_dep"><label for="country_dep">Pays</label>
+                        </div>
+                    </div>
+                </div>
+                <button id="clear_dep" class="btn hide">Clear</button>
+            </fieldset>
+            <fieldset class="col s4 offset-s1">
+                <legend>Arrivé</legend>
+                <input type="text" name="destination" id="destination"><label for="Destination">Arrivée</label>
+                <div id="complete_adress_arr" class="hide">
+                    <div class="row">
+                        <div class="col s3">
+                            <input type="text" name="numArrive" id="street_number_arr"><label for="numArrive">n°</label>
+                        </div>
+                        <div class="col s9">
+                            <input type="text" name="rueArrive" id="route_arr"><label for="rueArrive">rue</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s3">
+                            <input type="text" name="cpArrive" id="postal_code_arr"><label for="cpArrive">code postal</label>
+                        </div>
+                        <div class="col s9">
+                            <input type="text" name="villeArrive" id="locality_arr"><label for="villeArrive">ville</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s6">
+                            <input type="text" name="area_arr" id="administrative_area_level_1_arr"><label for="area_arr">Région</label>
+                        </div>
+                        <div class="col s6">
+                            <input type="text" name="country_arr" id="country_arr"><label for="country_arr">Pays</label>
+                        </div>
+                    </div>
+                </div>
+                <button id="clear_arr" class="btn hide">Clear</button>
+            </fieldset>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col s2 offset-s5">
+            <button id="fRechercheValid" class="btn" onclick="javascript:calculate()">Test</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s10 offset-s1">
+            <div id="map">En chargement ...</div>
+            <div id="distance" class="hide">Distance de : <span id="km"></span>km</div>
+        </div>
+    </div>
+    <script type="text/javascript" src="script/script.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=-YOUR-KEY-&callback=init&libraries=places"></script>
+</body>
+</html>

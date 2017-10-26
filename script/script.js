@@ -95,8 +95,7 @@ fillOrigin = function () {
     // Get the place details from the autocomplete object.
     var place = origin.getPlace();
 
-    document.getElementById('complete_adress_dep').className='show';
-    document.getElementById('clear_dep').className='btn show';
+    document.getElementById('expandDep').className='material-icons details show';
 
     for (var component in componentForm) {
         document.getElementById(component+'_dep').value = '';
@@ -136,6 +135,25 @@ fillDestination = function(){
         }
     }
 }
+
+$('.details').on('click',function(){
+    var parent = $(this).parent();
+    // console.log($(parent).children('.hide'));
+    $(parent).children('.hide').addClass('show');
+    $(parent).children('.hide').removeClass('hide');
+    $(this).addClass('hide');
+    $(this).removeClass('show');
+})
+
+$('.hide_details').on('click',function(){
+    var parent = $(this).parent().parent();
+    // console.log($(parent).children('.hide'));
+    $(parent).children('.show').addClass('hide');
+    $(parent).children('.show').removeClass('show');
+    $(parent).children('.details').addClass('show');
+    $(parent).children('.details').removeClass('hide');
+});
+    
 
 
 

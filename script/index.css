@@ -5,6 +5,11 @@
     width:100%;
 }
 
+#fRechercheValid
+{
+    margin-bottom: 80px;
+}
+
 .hide
 {
     display: none;
@@ -18,4 +23,29 @@
 .btn
 {
     margin-bottom: 20px;
+}
+
+hr
+{
+    margin-left:8.5%;
+    width :33%;
+}
+
+.car
+{
+    position: absolute;
+    width: 35%;
+    float: right;
+    right: 9%;
+    top: 0;
+}
+
+a.collection-item li
+{
+    height:70px;
+}
+
+img
+{
+    width:150px;
 }

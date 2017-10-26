@@ -54,7 +54,8 @@
             <fieldset class="col s4 offset-s1">
                 <legend>Arrivé</legend>
                 <input type="text" name="destination" id="destination"><label for="Destination">Arrivée</label>
-                <!--
+                <br>
+                <i id="expandArr" class="material-icons details hide">expand_more</i>
                 <div id="complete_adress_arr" class="hide">
                     <div class="row">
                         <div class="col s3">
@@ -80,19 +81,41 @@
                             <input type="text" name="country_arr" id="country_arr"><label for="country_arr">Pays</label>
                         </div>
                     </div>
+                    <button id="clear_arr" class="btn hide">Clear</button>
+                    <i class="material-icons hide_details">expand_less</i>
                 </div>
-                <button id="clear_arr" class="btn hide">Clear</button>
-                -->
             </fieldset>
         </div>
-    </form>
-    <div class="step">
+    
+        <div class="step">
 
+        </div>
+    </form>
+    <div class="car">
+            <ul class="collection">
+                <a href="" class="collection-item">
+                    <li>T1 <img class="right" src="img/T1.png" alt="T1"></li>
+                </a>
+                <a href="" class="collection-item">
+                    <li>T2 <img class="right" src="img/T2.png" alt="T2"></li>
+                </a>
+                <a href="" class="collection-item">
+                    <li>T3 <img class="right" src="img/T3.png" alt="T3"></li>
+                </a>
+                <a href="" class="collection-item">
+                    <li>T4 <img class="right" src="img/T4.png" alt="T4"></li>
+                </a>
+                <a href="" class="collection-item">
+                    <li>T4H / T4P <img class="right" src="img/T4H.png" alt="T4H"><img class="right" src="img/T4P.png" alt="T4P"></li>
+                </a>
+            </ul>
+        </div>
+    <div class="row">
+            <div class="col s2 offset-s1">
+                <button id="addStep" class="btn">Ajout Etape</button>
+            </div>
     </div>
     <div class="row">
-        <div class="col s2 offset-s1">
-            <button id="addStep" class="btn">Ajout Etape</button>
-        </div>
         <div class="col s2 offset-s5">
             <button id="fRechercheValid" class="btn" onclick="javascript:calculate()">Trajet</button>
         </div>
@@ -100,7 +123,6 @@
     <div class="row">
         <div class="col s10 offset-s1">
             <div id="map">En chargement ...</div>
-            <div id="distance" class="hide">Distance de : <span id="km"></span>km</div>
         </div>
     </div>
     <script type="text/javascript" src="script/script.js"></script>

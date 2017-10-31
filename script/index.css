@@ -10,6 +10,11 @@
     margin-bottom: 80px;
 }
 
+.resultat
+{
+    display:none;
+}
+
 .hide
 {
     display: none;

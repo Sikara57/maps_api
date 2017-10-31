@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="script/index.css">
     
     <!-- Compiled and minified JavaScript -->
+    <script type="text/javascript" src="script/tarif.js"></script> <!-- Script contenant un tableau avec les tarifs -->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 </head>
@@ -23,26 +24,26 @@
                 <div id="complete_adress_dep" class="hide">
                     <div class="row">
                         <div class="col s3">
-                            <input type="text" name="numDepart" id="street_number_dep"><label for="numDepart">n°</label>
+                            <input type="text" name="numDepart" id="street_number_dep" readonly><label for="numDepart">n°</label>
                         </div>
                         <div class="col s9">
-                            <input type="text" name="rueDepart" id="route_dep"><label for="rueDepart">rue</label>
+                            <input type="text" name="rueDepart" id="route_dep" readonly><label for="rueDepart">rue</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s3">
-                            <input type="text" name="cpDepart" id="postal_code_dep"><label for="cpDepart">code postal</label>
+                            <input type="text" name="cpDepart" id="postal_code_dep" readonly><label for="cpDepart">code postal</label>
                         </div>
                         <div class="col s9">
-                            <input type="text" name="villeDepart" id="locality_dep"><label for="villeDepart">ville</label>
+                            <input type="text" name="villeDepart" id="locality_dep" readonly><label for="villeDepart">ville</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s6">
-                            <input type="text" name="area_dep" id="administrative_area_level_1_dep"><label for="area_dep">Région</label>
+                            <input type="text" name="area_dep" id="administrative_area_level_1_dep" readonly><label for="area_dep">Région</label>
                         </div>
                         <div class="col s6">
-                            <input type="text" name="country_dep" id="country_dep"><label for="country_dep">Pays</label>
+                            <input type="text" name="country_dep" id="country_dep" readonly><label for="country_dep">Pays</label>
                         </div>
                     </div>
                     <button id="clear_dep" class="btn hide">Clear</button>
@@ -59,26 +60,26 @@
                 <div id="complete_adress_arr" class="hide">
                     <div class="row">
                         <div class="col s3">
-                            <input type="text" name="numArrive" id="street_number_arr"><label for="numArrive">n°</label>
+                            <input type="text" name="numArrive" id="street_number_arr" readonly><label for="numArrive">n°</label>
                         </div>
                         <div class="col s9">
-                            <input type="text" name="rueArrive" id="route_arr"><label for="rueArrive">rue</label>
+                            <input type="text" name="rueArrive" id="route_arr" readonly><label for="rueArrive">rue</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s3">
-                            <input type="text" name="cpArrive" id="postal_code_arr"><label for="cpArrive">code postal</label>
+                            <input type="text" name="cpArrive" id="postal_code_arr" readonly><label for="cpArrive">code postal</label>
                         </div>
                         <div class="col s9">
-                            <input type="text" name="villeArrive" id="locality_arr"><label for="villeArrive">ville</label>
+                            <input type="text" name="villeArrive" id="locality_arr" readonly><label for="villeArrive">ville</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col s6">
-                            <input type="text" name="area_arr" id="administrative_area_level_1_arr"><label for="area_arr">Région</label>
+                            <input type="text" name="area_arr" id="administrative_area_level_1_arr" readonly><label for="area_arr">Région</label>
                         </div>
                         <div class="col s6">
-                            <input type="text" name="country_arr" id="country_arr"><label for="country_arr">Pays</label>
+                            <input type="text" name="country_arr" id="country_arr" readonly><label for="country_arr">Pays</label>
                         </div>
                     </div>
                     <button id="clear_arr" class="btn hide">Clear</button>
@@ -86,30 +87,37 @@
                 </div>
             </fieldset>
         </div>
-    
-        <div class="step">
 
+        <div class="step">
+                
+        </div>
+
+        <div class="row">
+            <fieldset class="col s4 offset-s1">
+                <legend>Frais supplémentaires</legend>
+                <input type="text" name="frais" id="frais" value="0"><label for="frais">Estimation</label>
+            </fieldset>
         </div>
     </form>
     <div class="car">
-            <ul class="collection">
-                <a href="" class="collection-item">
-                    <li>T1 <img class="right" src="img/T1.png" alt="T1"></li>
-                </a>
-                <a href="" class="collection-item">
-                    <li>T2 <img class="right" src="img/T2.png" alt="T2"></li>
-                </a>
-                <a href="" class="collection-item">
-                    <li>T3 <img class="right" src="img/T3.png" alt="T3"></li>
-                </a>
-                <a href="" class="collection-item">
-                    <li>T4 <img class="right" src="img/T4.png" alt="T4"></li>
-                </a>
-                <a href="" class="collection-item">
-                    <li>T4H / T4P <img class="right" src="img/T4H.png" alt="T4H"><img class="right" src="img/T4P.png" alt="T4P"></li>
-                </a>
-            </ul>
-        </div>
+        <ul class="collection">
+            <a href="#" class="collection-item">
+                <li>T1 <img class="right" src="img/T1.png" alt="T1"></li>
+            </a>
+            <a href="#" class="collection-item">
+                <li>T2 <img class="right" src="img/T2.png" alt="T2"></li>
+            </a>
+            <a href="#" class="collection-item">
+                <li>T3 <img class="right" src="img/T3.png" alt="T3"></li>
+            </a>
+            <a href="#" class="collection-item">
+                <li>T4 <img class="right" src="img/T4.png" alt="T4"></li>
+            </a>
+            <a href="#" class="collection-item">
+                <li>T4H / T4P <img class="right" src="img/T4H.png" alt="T4H"><img class="right" src="img/T4P.png" alt="T4P"></li>
+            </a>
+        </ul>
+    </div>
     <div class="row">
             <div class="col s2 offset-s1">
                 <button id="addStep" class="btn">Ajout Etape</button>
@@ -117,12 +125,21 @@
     </div>
     <div class="row">
         <div class="col s2 offset-s5">
-            <button id="fRechercheValid" class="btn" onclick="javascript:calculate()">Trajet</button>
+            <button id="fRechercheValid" class="btn" onclick="calculate()">Trajet</button>
         </div>
     </div>
     <div class="row">
         <div class="col s10 offset-s1">
             <div id="map">En chargement ...</div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col s10 offset-s1">
+            <div class="resultat">
+                Km : <span id="km"></span> <br>
+                Durée : <span id="duree"></span> <br>
+                Tarif : <span id="tarif"></span>
+            </div>
         </div>
     </div>
     <script type="text/javascript" src="script/script.js"></script>

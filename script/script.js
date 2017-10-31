@@ -5,8 +5,10 @@ var placeSearch, origin, destination;
 var numberStep = 0;
 var tabStep = [];
 var waypts = [];
+var frais = 0;
+var total = 0;
 
-var km,time;
+var km = 0,time=0;
 
 var componentForm = {
     street_number: 'short_name',
@@ -16,6 +18,20 @@ var componentForm = {
     country: 'long_name',
     postal_code: 'short_name'
   };
+
+  
+
+// tableau pour les calculs de tarifs
+var data = listeTarif;
+
+// fonction de conversion en minute
+function convertHour(val)
+{
+    var tmp = val/3600;
+    var tmp2 = parseFloat(tmp)-Math.trunc(tmp)
+
+    return Math.trunc(tmp)+'h'+ Math.round(parseFloat(tmp2)*60)
+}
 
 
 clear = function()
@@ -90,11 +106,59 @@ calculate = function()
     directionsService.route(request, function(response, status){ // Envoie de la requête pour calculer le parcours
         // console.log(response.routes[0].legs[0].distance.text);
         if(status == google.maps.DirectionsStatus.OK){
-            console.log(response);
+            // console.log(response);
             directionsDisplay.setDirections(response); // Trace l'itinéraire sur la carte et les différentes étapes du parcours
-            km = response.routes[0].legs[0].distance.text;
-            time = response.routes[0].legs[0].duration.text;
-            
+            if(waypts=='')
+            {
+                km = response.routes[0].legs[0].distance.text;
+                time = response.routes[0].legs[0].duration.text;
+
+                km = parseInt(km.replace(' km',''));
+            }
+            else
+            {
+                response.routes[0].legs.forEach(function(element){
+                    var tmp = element.distance.text;
+                    km = parseInt(km)+parseInt(tmp.replace(' km','')); 
+                    time = parseInt(element.duration.value)+parseInt(time);
+                });
+                time = convertHour(time)
+            }
+
+            convertHour(30523);
+            $('#km').text(km+' km');
+            $('#duree').text(time);
+
+            var type = $('.collection-item.active li').text();
+            type = type.replace(' ','');
+            frais = $('#frais').val();
+
+            data.forEach(function(element){
+                if(element.nom == type)
+                {
+                    if(km<100)
+                    {
+                       total = parseInt(element.inf_100)+parseInt(frais);
+                    }
+                    else if(km>=100 && km<150)
+                    {
+                        total = parseInt(element.inf_150_sup_100)+parseInt(frais);
+                    }
+                    else if(km>=150 && km<200)
+                    {
+                        total = parseInt(element.inf_200_sup_150)+parseInt(frais);
+                    }
+                    else
+                    {
+                        total = parseFloat(element.sup_200*km)+parseInt(frais);
+                        console.log(total)
+                    }
+                }
+
+            });
+            $('#tarif').text(total.toPrecision(3)+' €');            
+
+            $('.resultat').show();            
         }
     });
 };
@@ -176,12 +240,6 @@ fill = function(q)
     }
 }
 
-
-function prix()
-{
-    
-}
-
 $('.details').on('click',function(){
     var parent = $(this).parent();
     // console.log($(parent).children('.hide'));
@@ -206,18 +264,20 @@ $('#addStep').on('click',function(){
         $('.step').append('<div class="row><div class="col s4 offset-s1"><hr></div></div>');
     }
 
+    var aff = numberStep+1;
+
     $('.step').append('<div id="step' + numberStep + '" class="row"></div>');
     var step = $('#step' + numberStep);
     $(step).append('<fieldset class="col s4 offset-s1"></fieldset>');
     var fieldset = $(step).children();
-    $(fieldset).append('<legend>Etape '+ numberStep +'</legend>');
+    $(fieldset).append('<legend>Etape '+ aff +'</legend>');
     $(fieldset).append('<input type="text" name="etape'+ numberStep +'" id="etape'+ numberStep +'"><label for="etape'+ numberStep +'">Etape '+ numberStep +'</label><br>');
     $(fieldset).append('<i id="expandStep' + numberStep + '" class="material-icons details hide">expand_more</i>');
     $(fieldset).append('<div id="complete_adress_step' + numberStep + '" class="hide"></div>');
-    $('#complete_adress_step' + numberStep).append('<div class="row"><div class="col s3"><input type="text" name="numStep' + numberStep + '" id="street_number_step' + numberStep + '"><label for="numStep' + numberStep + '">n°</label></div><div class="col s9"><input type="text" name="rueStep' + numberStep + '" id="route_step' + numberStep + '"><label for="rueStep' + numberStep + '">rue</label></div></div>');
-    $('#complete_adress_step' + numberStep).append('<div class="row"><div class="col s3"><input type="text" name="cpStep' + numberStep + '" id="postal_code_step' + numberStep + '"><label for="cpStep' + numberStep + '">code postal</label></div><div class="col s9"><input type="text" name="villeStep' + numberStep + '" id="locality_step' + numberStep + '"><label for="villeStep' + numberStep + '">ville</label></div></div>');
-    $('#complete_adress_step' + numberStep).append('<div class="row"><div class="col s6"><input type="text" name="area_step' + numberStep + '" id="administrative_area_level_1_step' + numberStep + '"><label for="area_step' + numberStep + '">Région</label></div><div class="col s6"><input type="text" name="country_step' + numberStep + '" id="country_step' + numberStep + '"><label for="country_step' + numberStep + '">Pays</label></div></div>');
-    $('#complete_adress_step' + numberStep).append('<button id="clear_dep" class="btn hide">Clear</button>');
+    $('#complete_adress_step' + numberStep).append('<div class="row"><div class="col s3"><input type="text" name="numStep' + numberStep + '" id="street_number_step' + numberStep + '" readonly><label for="numStep' + numberStep + '">n°</label></div><div class="col s9"><input type="text" name="rueStep' + numberStep + '" id="route_step' + numberStep + '" readonly><label for="rueStep' + numberStep + '">rue</label></div></div>');
+    $('#complete_adress_step' + numberStep).append('<div class="row"><div class="col s3"><input type="text" name="cpStep' + numberStep + '" id="postal_code_step' + numberStep + '" readonly><label for="cpStep' + numberStep + '">code postal</label></div><div class="col s9"><input type="text" name="villeStep' + numberStep + '" id="locality_step' + numberStep + '" readonly><label for="villeStep' + numberStep + '">ville</label></div></div>');
+    $('#complete_adress_step' + numberStep).append('<div class="row"><div class="col s6"><input type="text" name="area_step' + numberStep + '" id="administrative_area_level_1_step' + numberStep + '" readonly><label for="area_step' + numberStep + '">Région</label></div><div class="col s6"><input type="text" name="country_step' + numberStep + '" id="country_step' + numberStep + '" readonly><label for="country_step' + numberStep + '">Pays</label></div></div>');
+    $('#complete_adress_step' + numberStep).append('<button class="btn hide clear">Clear</button>');
     $('#complete_adress_step' + numberStep).append('<i id="etapeHide'+ numberStep +'" class="material-icons hide_details">expand_less</i>');
 
     tabStep[numberStep] = new google.maps.places.Autocomplete(
@@ -247,3 +307,8 @@ $('#addStep').on('click',function(){
     numberStep++;
 });
 
+
+$('.collection-item').on('click',function(){
+    $('.collection-item').removeClass('active');
+    $(this).addClass('active');
+});
